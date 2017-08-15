@@ -2,13 +2,18 @@
 
 import sys
 
+#brute force
 def leftRotation(a, d):
     for i in range(d):
         temp = a[0]
         for i in range(len(a)-1):
             a[i]=a[i+1]
         a[len(a)-1] = temp
-    return a        
+    return a  
+
+#python magic - using slice operation
+def leftRotation(a, d):
+    return a[d:]+a[:d] 
 
 if __name__ == "__main__":
     n, d = input().strip().split(' ')
