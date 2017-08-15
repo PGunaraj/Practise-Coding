@@ -1,0 +1,19 @@
+#!/bin/python3
+
+import sys
+
+if __name__ == "__main__":
+    n, m = input().strip().split(' ')
+    n, m = [int(n), int(m)]
+    lst=[]
+    for i in range(n):
+        lst.insert(i,0)
+    for a0 in range(m):
+        a, b, k = input().strip().split(' ')
+        a, b, k = [int(a), int(b), int(k)]
+        if a >=0 and b >=0 and a <=n and b <=n:
+            for i in range(a-1,b,1):
+                lst[i] += k
+        else:
+            print("Error: Enter a and b values within index range of the list of size 'n'")
+print(max(lst))
