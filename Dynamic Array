@@ -1,0 +1,16 @@
+N,q = input().split(' ')
+LastAns = 0
+s=[]
+for i in range(int(N)):
+    s.insert(i,[])
+for i in range(int(q)):
+    Q,X,Y=input().split(' ')
+    if int(Q) == 1:
+        Ans = (int(X)^LastAns)%int(N)
+        s[Ans].append(int(Y))
+    elif int(Q) == 2:
+        Ans = (int(X)^LastAns)%int(N)
+        seq = int(Y)%len(s[Ans])
+        LastAns = s[Ans][seq]
+        print(LastAns)
+        
