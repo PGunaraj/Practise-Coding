@@ -33,17 +33,29 @@ for _ in range(m):
 print(max(accumulate(dx)))
 
 #without using 'accumulate'
-n, inputs = [int(n) for n in input().split(" ")]
-list = [0]*(n+1)
-for _ in range(inputs):
-    x, y, incr = [int(n) for n in input().split(" ")]
-    list[x-1] += incr
-    if((y)<=len(list)): list[y] -= incr;
 
-max = x = 0
-for i in list:
-   x=x+i;
-   if(max<x): max=x;
-print(max)
+#!/bin/python3
+
+import sys
+
+if __name__ == "__main__":
+    n, m = input().strip().split(' ')
+    n, m = [int(n), int(m)]
+    lst=[0]*(n+1)
+    for a0 in range(m):
+        a, b, k = input().strip().split(' ')
+        a, b, k = [int(a), int(b), int(k)]
+        lst[a] += 100
+        if b<=len(lst):
+            lst[b] -= 100
+    max=temp=0
+    #prefix sum
+    for i in lst:
+        temp += i
+        if max <=temp:
+            max=temp
+    print(max)
+        
+
 
 
