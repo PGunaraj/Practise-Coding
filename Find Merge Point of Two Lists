@@ -1,0 +1,13 @@
+def FindMergeNode(headA, headB):
+    A=headA
+    B=headB
+    while(A!=B):
+        if A.next==None:
+            A=headB
+        else:
+            A=A.next
+        if B.next==None:
+            B=headA
+        else:
+            B=B.next
+    return B.data
