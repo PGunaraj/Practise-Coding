@@ -1,0 +1,13 @@
+def SortedInsert(head, data):
+    if head == None:
+        head=Node(data,None,None)
+        return head
+    else:
+        realhead=head
+        while head!=None and head.data<data:
+            prev=head
+            head=head.next
+        newnode=Node(data,head,prev)
+        prev.next=newnode
+        head=realhead
+        return head
