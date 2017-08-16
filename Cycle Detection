@@ -1,0 +1,9 @@
+def has_cycle(head):
+    lst=[]
+    while(head != None):
+        if head.data not in lst:
+            lst.append(head.data)
+            head = head.next
+        else:
+            return 1
+    return 0
