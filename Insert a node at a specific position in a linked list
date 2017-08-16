@@ -1,0 +1,48 @@
+"""
+ Insert Node at a specific position in a linked list
+ head input could be None as well for empty list
+ Node is defined as
+ 
+ class Node(object):
+ 
+   def __init__(self, data=None, next_node=None):
+       self.data = data
+       self.next = next_node
+
+ return back the head of the linked list in the below method. 
+"""
+#This is a "method-only" submission.
+#You only need to complete this method.
+def InsertNth(head, data, position):
+    if position == 0:
+        if head is None:
+            head=Node(data,None)
+            return head
+        else:
+            newhead=Node(data,head)
+            head=newhead
+            return head
+    else:
+        realhead=head
+        count=0
+        while head != None and count!=position:
+            prev=head
+            head=head.next
+            count+=1
+        newnode=Node(data,head)
+        prev.next=newnode
+        head=realhead
+        return head
+        
+
+            
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
