@@ -1,0 +1,9 @@
+def Reverse(head):
+    realhead=head
+    while head!=None:
+        temp=head.prev
+        head.prev=head.next
+        head.next=temp
+        realhead=head
+        head=head.prev   
+    return realhead
