@@ -1,0 +1,16 @@
+def RemoveDuplicates(head):
+    if head==None:
+        return None
+    else:
+        realhead = head
+        prev = head
+        head=head.next
+        while head != None:
+            if prev.data==head.data:
+                head=head.next
+                prev.next.data=None
+                prev.next=head
+            else:
+                prev=head
+                head=head.next
+        return realhead
