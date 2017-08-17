@@ -1,0 +1,101 @@
+class BinaryTree:
+	def __init__(self,r):
+		self.root=r
+		self.left=None
+		self.right=None
+		
+	def insertLeft(self,val):
+		if self.left == None:
+			self.left=BinaryTree(val)
+		else:
+			t=BinaryTree(val)
+			t.left=self.left
+			self.left=t
+	
+	def insertRight(self,val):
+		if self.right==None:
+			self.right=BinaryTree(val)
+		else:
+			t=BinaryTree(val)
+			t.right=self.right
+			self.right=t
+			
+	def getLeft(self):
+		return self.left
+		
+	def getRight(self):
+		return self.right
+		
+	def getRoot(self):
+		return self.root
+		
+	def setRoot(self,newval):
+		self.root=newval
+		
+		
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        return self.items.pop()
+
+    def size(self):
+        return len(self.items)
+
+    def isEmpty(self):
+        return self.items == []
+
+    def peek(self):
+        return self.items[len(self.items) - 1]
+
+    def printStack(self):
+        return self.items
+
+def buildParseTree(exp):
+	e=exp.split()
+	s=Stack()
+	t=BinaryTree(' ')
+	s.push(t)
+	current=t
+	for i in e:
+		if i == '(':
+			current.insertLeft(' ')
+			s.push(current)
+			current=current.getLeft()
+		elif i not in ['+','-','*','/',')']:
+			current.setRoot(int(i))
+			parent=s.pop()
+			current=parent
+		elif i in ['+','-','*','/']:
+			current.setRoot(i)
+			current.insertRight(' ')
+			s.push(current)
+			current=current.getRight()
+		elif i == ')':
+			current=s.pop()
+		else:
+			raise ValueError
+	return t
+	
+pt = buildParseTree("( ( 10 + 5 ) * 3 )")
+#print(pt.getRoot())
+
+
+def evalParseTree(parsetree):
+	op={'+':operator.add, '-':operator.sub, '*':operator.mul, '/':operator.truediv}
+	left=parsetree.getLeft()
+	right=parsetree.getRight()
+	if left and right:
+		fn=op[parsetree.getRoot()]
+		return fn(evalParseTree(left),evalParseTree(right))
+	else:
+		return parsetree.getRoot()
+		
+x=evalParseTree(pt)
+#print(x)
+	
+			
