@@ -1,0 +1,16 @@
+def go_left(root):
+    if root.left:
+        go_left(root.left)
+    print(root.data),
+    
+def go_right(root):
+    print(root.data),
+    if root.right:
+        go_right(root.right)
+
+def topView(root):
+    if root.left:
+        go_left(root.left)
+    print(root.data),
+    if root.right:
+        go_right(root.right)
