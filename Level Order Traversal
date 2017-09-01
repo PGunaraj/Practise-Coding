@@ -1,0 +1,11 @@
+def levelOrder(root):
+    if root is None:
+        return
+    q = [root]
+    while len(q)>0:
+        item=q.pop(0)
+        print(item.data),
+        if item.left:
+            q.append(item.left)
+        if item.right:
+            q.append(item.right)
