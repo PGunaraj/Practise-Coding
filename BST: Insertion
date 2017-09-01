@@ -1,0 +1,10 @@
+def insert(r,val):
+    if r is None:
+        r=Node('')
+        r.data=val
+    else:
+        if val<r.data:
+            r.left=insert(r.left,val)
+        elif val>r.data:
+            r.right=insert(r.right,val)
+    return r
