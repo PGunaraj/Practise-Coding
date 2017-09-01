@@ -1,0 +1,12 @@
+def decodeHuff(root , s):
+    r=root
+    str=""
+    for i in s:
+        if i == '0':
+            root=root.left 
+        elif i == '1':
+            root=root.right
+        if root.left == None and root.right == None:
+                str+=root.data
+                root=r
+    print str
