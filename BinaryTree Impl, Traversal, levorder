@@ -46,8 +46,6 @@ class BinaryTree:
 				self.right=temp.right
 			else:
 				self.root=None
-	def isEmpty(self):
-		return self.root==None
 	def preorder(self):
 		print(self.root,end=" ")
 		if self.left:
@@ -66,6 +64,18 @@ class BinaryTree:
 		if self.right:
 			self.right.postorder()
 		print(self.root,end=" ")
+def levelorder(root):
+	if root is None:
+		return
+	q=[root]
+	while len(q)>0:
+		#print(q)
+		t=q.pop(0)
+		print(t.root, end=" ")
+		if t.left:
+			q.append(t.left)
+		if t.right:
+			q.append(t.right)
 
 x=BinaryTree('a')
 x.insertLeft('b')
@@ -77,8 +87,8 @@ r=x.getRight()
 r.insertLeft('e')
 r.insertRight('f')
 x.deleteLeft()
-r.deleteRight()
 #print(x.getRoot(),l.getRoot(),l.getRight().getRoot(), r.getRoot(), r.getLeft().getRoot(),r.getRight().getRoot())
-x.preorder()
+#x.preorder()
 #x.inorder()
 #x.postorder()
+levelorder(x)
