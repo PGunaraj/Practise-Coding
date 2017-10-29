@@ -46,6 +46,8 @@ class BinaryTree:
 				self.right=temp.right
 			else:
 				self.root=None
+	def isEmpty(self):
+		return self.root==None
 	def preorder(self):
 		print(self.root,end=" ")
 		if self.left:
