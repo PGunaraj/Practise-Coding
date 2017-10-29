@@ -24,6 +24,28 @@ class BinaryTree:
 			t=BinaryTree(val)
 			t.right=self.right
 			self.right=t
+	def deleteLeft(self):
+		if self.left:
+			temp=self.left
+			if temp.left and temp.right:
+				self.left=temp.left
+				self.left.right=temp.right
+			elif temp.left:
+				self.left=temp.left
+			elif temp.right:
+				self.left=temp.right
+	def deleteRight(self):
+		if self.right:
+			temp=self.right
+			if temp.left and temp.right:
+				self.right=temp.left
+				self.right.right=temp.right
+			elif temp.left:
+				self.right=temp.left
+			elif temp.right:
+				self.right=temp.right
+			else:
+				self.root=None
 	def preorder(self):
 		print(self.root,end=" ")
 		if self.left:
@@ -47,11 +69,14 @@ x=BinaryTree('a')
 x.insertLeft('b')
 x.insertRight('c')
 l=x.getLeft()
+l.insertLeft('x')
 l.insertRight('d')
 r=x.getRight()
 r.insertLeft('e')
 r.insertRight('f')
+x.deleteLeft()
+r.deleteRight()
 #print(x.getRoot(),l.getRoot(),l.getRight().getRoot(), r.getRoot(), r.getLeft().getRoot(),r.getRight().getRoot())
 x.preorder()
-x.inorder()
-x.postorder()
+#x.inorder()
+#x.postorder()
