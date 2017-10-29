@@ -1,0 +1,57 @@
+# your code goes here
+class BinaryTree:
+	def __init__(self,r):
+		self.root=r
+		self.left=None
+		self.right=None
+	def getLeft(self):
+		return self.left
+	def getRight(self):
+		return self.right
+	def getRoot(self):
+		return self.root
+	def insertLeft(self,val):
+		if self.left==None:
+			self.left=BinaryTree(val)
+		else:
+			t=BinaryTree(val)
+			t.left=self.left
+			self.left=t
+	def insertRight(self,val):
+		if self.right==None:
+			self.right=BinaryTree(val)
+		else:
+			t=BinaryTree(val)
+			t.right=self.right
+			self.right=t
+	def preorder(self):
+		print(self.root,end=" ")
+		if self.left:
+			self.left.preorder()
+		if self.right:
+			self.right.preorder()
+	def inorder(self):
+		if self.left:
+			self.left.inorder()
+		print(self.root, end=" ")
+		if self.right:
+			self.right.inorder()
+	def postorder(self):
+		if self.left:
+			self.left.postorder()
+		if self.right:
+			self.right.postorder()
+		print(self.root,end=" ")
+
+x=BinaryTree('a')
+x.insertLeft('b')
+x.insertRight('c')
+l=x.getLeft()
+l.insertRight('d')
+r=x.getRight()
+r.insertLeft('e')
+r.insertRight('f')
+#print(x.getRoot(),l.getRoot(),l.getRight().getRoot(), r.getRoot(), r.getLeft().getRoot(),r.getRight().getRoot())
+x.preorder()
+x.inorder()
+x.postorder()
