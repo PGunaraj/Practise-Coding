@@ -1,0 +1,52 @@
+class Stack:
+	def __init__(self):
+		self.list=[]
+	def push(self,val):
+		self.list.append(val)
+	def pop(self):
+		return self.list.pop()
+	def isEmpty(self):
+		return len(self.list)==0
+	def top(self):
+		return self.list[len(self.list)-1]
+	def printStack(self):
+		return self.list
+	def size(self):
+		return len(self.list)
+
+def notGreater(x,i):
+	precedence = {'+':1, '-':1, '*':2, '/':2, '^':3}
+	try:
+		a=precedence[i]
+		b=precedence[x.top()]
+		if a<=b:
+			return True
+		else:
+			return False
+	except(KeyError):
+		return False
+	
+def infixtopostfix(exp,x):
+	out=[]
+	for i in exp:
+		if i.isalpha():
+			out.append(i)
+		elif i=="(":
+			x.push(i)
+		elif i==")":
+			while (not x.isEmpty()) and x.top()!="(":
+				out.append(x.pop())
+			if (not x.isEmpty()) and x.top()!="(":
+				return -1
+			else:
+				x.pop()
+		else:
+			while (not x.isEmpty()) and notGreater(x,i):
+				out.append(x.pop())
+			x.push(i)
+	while not x.isEmpty():
+		out.append(x.pop())
+	print("".join(out))
+
+x=Stack()
+infixtopostfix(exp,x)
