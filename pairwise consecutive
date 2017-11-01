@@ -1,0 +1,36 @@
+class Stack:
+	def __init__(self):
+		self.list=[]
+	def push(self,val):
+		self.list.append(val)
+	def pop(self):
+		return self.list.pop()
+	def isEmpty(self):
+		return len(self.list)==0
+	def top(self):
+		return self.list[len(self.list)-1]
+	def printStack(self):
+		return self.list
+
+def pairwise(x,new):
+	while not x.isEmpty():
+		new.push(x.pop())
+	while new.isEmpty()>1:
+		n1=new.pop()
+		n2=new.pop()
+		if abs(n1-n2) != 1:
+			return False
+	return True
+
+s=Stack()
+s.push(4)
+s.push(5)
+s.push(-2)
+s.push(-3)
+s.push(11)
+s.push(10)
+s.push(5)
+s.push(6)
+s.push(20)
+n=Stack()
+print(pairwise(s,n))
