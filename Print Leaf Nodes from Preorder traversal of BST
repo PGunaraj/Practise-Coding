@@ -1,0 +1,23 @@
+#recursive approach
+def printLeaf(l,s,e):
+    if s>e:
+        return []
+    if s==e:
+        return [str(l[s])]
+    ans=[]
+    i=s+1
+    while i<=e:
+        if l[s]<l[i]:
+            break
+        i+=1
+    ans+=printLeaf(l,s+1,i-1)
+    ans+=printLeaf(l,i,e)
+    return ans
+    
+t=int(input())
+for i in range(t):
+    n=int(input())
+    a=list(map(int,input().split()))
+    ans=printLeaf(a,0,n-1)
+    print(' '.join(ans))
+ 
