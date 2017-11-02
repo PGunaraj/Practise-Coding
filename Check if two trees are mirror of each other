@@ -1,0 +1,69 @@
+# your code goes here
+class BinaryTree:
+	def __init__(self,r):
+		self.root=r
+		self.left=None
+		self.right=None
+	def getLeft(self):
+		return self.left
+	def getRight(self):
+		return self.right
+	def getRoot(self):
+		return self.root
+	def insertLeft(self,val):
+		if self.left==None:
+			self.left=BinaryTree(val)
+		else:
+			t=BinaryTree(val)
+			t.left=self.left
+			self.left=t
+	def insertRight(self,val):
+		if self.right==None:
+			self.right=BinaryTree(val)
+		else:
+			t=BinaryTree(val)
+			t.right=self.right
+			self.right=t
+	def deleteLeft(self):
+		if self.left:
+			temp=self.left
+			if temp.left and temp.right:
+				self.left=temp.left
+				self.left.right=temp.right
+			elif temp.left:
+				self.left=temp.left
+			elif temp.right:
+				self.left=temp.right
+	def deleteRight(self):
+		if self.right:
+			temp=self.right
+			if temp.left and temp.right:
+				self.right=temp.left
+				self.right.right=temp.right
+			elif temp.left:
+				self.right=temp.left
+			elif temp.right:
+				self.right=temp.right
+			else:
+				self.root=None
+				
+def checkMirror(root1,root2):
+	if (root1 is None and root2 is None):
+		return True
+	if (root1 is None or root2 is None):
+		return False
+	return (root1.root==root2.root and checkMirror(root1.left,root2.right) and checkMirror(root1.right,root2.left))
+				
+x=BinaryTree('1')
+x.insertLeft('3')
+x.insertRight('2')
+r=x.getRight()
+r.insertLeft('4')
+r.insertRight('5')
+x1=BinaryTree('1')
+x1.insertLeft('2')
+x1.insertRight('3')
+r1=x1.getLeft()
+r1.insertLeft('5')
+r1.insertRight('4')
+print(checkMirror(x,x1))
