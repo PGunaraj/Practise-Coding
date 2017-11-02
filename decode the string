@@ -1,0 +1,48 @@
+class Stack:
+	def __init__(self):
+		self.list=[]
+	def push(self,val):
+		self.list.append(val)
+	def pop(self):
+		return self.list.pop()
+	def isEmpty(self):
+		return len(self.list)==0
+	def top(self):
+		return self.list[len(self.list)-1]
+	def printStack(self):
+		return self.list
+	def size(self):
+		return len(self.list)
+
+def decode(exp):
+	i=Stack()
+	c=Stack()
+	out=""
+	e=0
+	while e < len(exp):
+		temp=0
+		if exp[e].isdigit():
+			while exp[e].isdigit():
+				temp= (temp*10)+int(exp[e])
+				e+=1
+			e-=1
+			i.push(temp)
+		elif exp[e]=="[" or exp[e].isalpha():
+			c.push(exp[e])
+		else:
+			out=""
+			while (not c.isEmpty()) and c.top()!="[":
+				out=c.pop()+out
+			count=i.pop()
+			out=out*int(count)
+			if (not c.isEmpty()) and c.top()=="[":
+				c.pop()
+			for j in range(len(out)):
+				c.push(out[j])
+		e+=1
+	return out
+			
+	
+	
+print(decode("11[a]"))
+				
