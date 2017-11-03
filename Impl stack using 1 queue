@@ -1,0 +1,42 @@
+class Queue:
+	def __init__(self):
+		self.list=[]
+	def enqueue(self,val):
+		self.list.append(val)
+	def dequeue(self):
+		return self.list.pop(0)
+	def front(self):
+		return self.list[0]
+	def size(self):
+		return len(self.list)
+	def isEmpty(self):
+		return len(self.list)==0
+	def printQueue(self):
+		print(self.list)
+
+def stack_push(q,val):
+	q.enqueue(val)
+	for i in range(q.size()-1):
+		q.enqueue(q.front())
+		q.dequeue()
+def stack_pop(q):
+	if q.isEmpty():
+		return
+	return q.dequeue()
+def stack_top(q):
+	if q.isEmpty():
+		return
+	return q.front()
+def stack_print(q):
+	return q.printQueue()
+def stack_isEmpty(q):
+	return q.size()==0
+
+q=Queue()
+stack_push(q,5)
+stack_push(q,4)
+stack_push(q,8)
+stack_print(q)
+print(stack_pop(q))
+print(stack_isEmpty(q))
+print(stack_top(q))
