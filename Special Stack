@@ -1,0 +1,84 @@
+#using temp stack
+class SpecialStack:
+	def __init__(self):
+		self.main=[]
+		self.aux=[]
+	def push(self,val):
+		self.main.append(val)
+		self.updateAux(val)
+	def updateAux(self,val):
+		if len(self.aux)==0:
+			self.aux.append(val)
+		else:
+			x=self.aux.pop()
+			self.aux.append(x)
+			if val<x:
+				self.aux.append(val)
+	def pop(self):
+		x=self.main.pop()
+		y=self.aux.pop()
+		if x!=y:
+			self.aux.append(y)
+		return x
+	def getMin(self):
+		x=self.aux.pop()
+		self.aux.append(x)
+		return x
+			
+s=SpecialStack()
+s.push(18)
+s.push(19)
+s.push(29)
+s.push(15)
+s.push(16)
+print(s.getMin())
+s.pop()
+s.pop()
+print(s.getMin())
+
+#without extra space
+class SpecialStack:
+	def __init__(self):
+		self.list=[]
+		self.min=0
+	def getMin(self):
+		if len(self.list)==0:
+			return
+		else:
+			return self.min
+	def peek(self):
+		if len(self.list)>0:
+			if self.list[len(self.list)-1] < self.min:
+				return self.min
+			else:
+				return self.list[len(self.list)-1]
+		else:
+			return
+	def push(self,val):
+		if len(self.list)==0:
+			self.min=val
+			self.list.append(val)
+		else:
+			if val<self.min:
+				self.list.append((2*val)-self.min)
+				self.min=val
+			else:
+				self.list.append(val)
+	def pop(self):
+		if len(self.list)==0:
+			return
+		else:
+			temp=self.list.pop()
+			if temp < self.min:
+				x=self.min
+				self.min=((2*x)-temp)
+				return x
+			else:
+				return temp
+				
+s=SpecialStack()
+s.push(18)
+s.push(15)
+s.push(12)
+s.pop()
+print(s.getMin())
