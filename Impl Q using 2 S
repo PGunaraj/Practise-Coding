@@ -1,0 +1,37 @@
+class Stack:
+	def __init__(self):
+		self.list=[]
+	def push(self,val):
+		self.list.append(val)
+	def pop(self):
+		return self.list.pop()
+	def isEmpty(self):
+		return len(self.list)==0
+	def top(self):
+		return self.list[len(self.list)-1]
+	def printStack(self):
+		print(self.list)
+	def size(self):
+		return len(self.list)
+
+def enqueue(s1,s2,val):
+	s1.push(val)
+def front(s1,s2):
+	while not s1.isEmpty():
+		s2.push(s1.pop())
+	return s2.top()
+def dequeue(s1,s2):
+	front(s1,s2)
+	return s2.pop()
+def printQueue(s1,s2):
+	front(s1,s2)
+	s2.printStack()
+
+s1=Stack()
+s2=Stack()
+enqueue(s1,s2,5)
+enqueue(s1,s2,4)
+enqueue(s1,s2,8)
+print(front(s1,s2))
+print(dequeue(s1,s2))
+printQueue(s1,s2)
