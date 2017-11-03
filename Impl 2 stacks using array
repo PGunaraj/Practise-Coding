@@ -1,0 +1,33 @@
+class TwoStacks:
+	def __init__(self,n):
+		self.arr=[None]*n
+		self.l=-1
+		self.r=n
+	def push1(self,val):
+		if self.l<self.r-1:
+			self.l+=1
+			self.arr[self.l]=val
+	def push2(self,val):
+		if self.l<self.r-1:
+			self.r-=1
+			self.arr[self.r]=val
+	def pop1(self):
+		if self.l>=0:
+			temp=self.arr[self.l]
+			self.l-=1
+			return temp
+	def pop2(self):
+		if self.r<n:
+			temp=self.arr[self.r]
+			self.r+=1
+			return temp
+	def printArr(self):
+		print(self.arr)
+
+s=TwoStacks(4)
+s.push1(5)
+s.push1(4)
+s.push1(6)
+s.push1(3)
+s.push1(7)
+s.printArr()
