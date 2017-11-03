@@ -1,0 +1,31 @@
+class Stack:
+	def __init__(self):
+		self.list=[]
+	def push(self,val):
+		self.list.append(val)
+	def pop(self):
+		return self.list.pop()
+	def isEmpty(self):
+		return len(self.list)==0
+	def top(self):
+		return self.list[len(self.list)-1]
+	def printStack(self):
+		return self.list
+	def size(self):
+		return len(self.list)
+
+def StockSpan(price):
+	span=[1]*len(price)
+	s=Stack()
+	s.push(0)
+	for i in range(1,len(price)):
+		while (not s.isEmpty()) and price[i]>=price[s.top()]:
+			s.pop()
+		if not s.isEmpty():
+			span[i]=i-s.top()
+		else:
+			span[i]=i+1
+		s.push(i)
+	return span
+
+print(StockSpan([100,80,60,70,60,75,85]))
