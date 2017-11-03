@@ -24,11 +24,17 @@ def stringCompression(string):
 			string[index]=string[l]
 			index+=1
 			string[index]=str(count)
+			index+=1
 		else:
 			return "error"
+	if index==len(string)-1:
+		string[index]=""
 	string=''.join(string)
 	return string
 	
-s="aaabcccd"
+s="aaabcccdd"
+s=list(s)
+print(stringCompression(s))
+s="aaabb"
 s=list(s)
 print(stringCompression(s))
