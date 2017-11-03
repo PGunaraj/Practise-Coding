@@ -1,0 +1,20 @@
+#using stack
+1. push all elem to stack
+2. pop top 2 elem A and B from stack
+3. if A knows B, push B. else push A
+4. repeat 2,3 until 1 elem is left out - x
+5. traverse elem array once and find if each elem knows x and x doesn't know anyone. 
+6. If yes, return YES. when one elem doesn't know x or x knows someone, then return NO.
+
+#using 2 pointers
+l=0
+r=n-1
+while l<r:
+  if elem[l] knows elem[n-1]:
+    l+=1
+  else:
+    r-=1
+for i in range(n):
+  if elem[i]!=elem[l] and (not elem[i] knows elem[l] or elem[l] knows elem[i]):
+    return "NO"
+return "YES"
