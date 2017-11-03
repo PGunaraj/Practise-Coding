@@ -1,0 +1,74 @@
+class Stack:
+	def __init__(self):
+		self.list=[]
+	def push(self,val):
+		self.list.append(val)
+	def pop(self):
+		return self.list.pop()
+	def isEmpty(self):
+		return len(self.list)==0
+	def top(self):
+		return self.list[len(self.list)-1]
+	def printStack(self):
+		return self.list
+	def size(self):
+		return len(self.list)
+
+def expEval(exp):
+	i=Stack()
+	o=Stack()
+	e=0
+	while e< len(exp):
+		if exp[e].isdigit():
+			temp=0
+			while e<len(exp):
+				if exp[e].isdigit():
+					temp=temp*10+int(exp[e])
+					e+=1
+				else:
+					break
+			e-=1
+			i.push(str(temp))
+		elif exp[e]=="(":
+			o.push(exp[e])
+		elif exp[e]==")":
+			while not o.isEmpty() and o.top()!="(":
+				b=i.pop()
+				a=i.pop()
+				op=o.pop()
+				i.push(str(eval(a+op+b)))
+			o.pop()
+		else:
+			while not o.isEmpty() and notGreater(exp[e],o.top()):
+				b=i.pop()
+				a=i.pop()
+				op=o.pop()
+				i.push(str(eval(a+op+b)))
+			o.push(exp[e])
+		e+=1
+	while not o.isEmpty():
+		b=i.pop()
+		a=i.pop()
+		op=o.pop()
+		i.push(str(eval(a+op+b)))
+		
+	return i.top()
+
+def notGreater(a,b):
+	precedence = {'+':1, '-':1, '*':2, '/':2}
+	try:
+		a=precedence[a]
+		b=precedence[b]
+		if a<=b:
+			return True
+		else:
+			return False
+	except(KeyError):
+		return False
+
+print(expEval("5+(2*3)-1"))
+print(expEval("10+2*6"))
+print(expEval("100*2+12"))
+print(expEval("100*(2+12)"))
+print(expEval("100*(2+12)/14"))
+				
