@@ -1,0 +1,61 @@
+class Queue:
+	def __init__(self):
+		self.list=[]
+	def enqueue(self,val):
+		self.list.append(val)
+	def dequeue(self):
+		return self.list.pop(0)
+	def front(self):
+		return self.list[0]
+	def size(self):
+		return len(self.list)
+	def isEmpty(self):
+		return len(self.list)==0
+	def printQueue(self):
+		print(self.list)
+
+def stack_push(li,q1,q2):
+	for val in li:
+		if q1.isEmpty():
+			q1.enqueue(val)
+			while not q2.isEmpty():
+				q1.enqueue(q2.dequeue())
+		elif q2.isEmpty():
+			q2.enqueue(val)
+			while not q1.isEmpty():
+				q2.enqueue(q1.dequeue())
+
+def stack_pop(q1,q2):
+	if not q1.isEmpty():
+		return q1.dequeue()
+	else:
+		return q2.dequeue()
+		
+def stack_top(q1,q2):
+	if not q1.isEmpty():
+		return q1.front()
+	else:
+		return q2.front()
+
+def stack_isEmpty(q1,q2):
+	return (q1.isEmpty() and q2.isEmpty())
+
+def stack_print(q1,q2):
+	if not q1.isEmpty():
+		return q1.printQueue()
+	else:
+		return q2.printQueue()
+
+def stack_size(q1,q2):
+	if not q1.isEmpty():
+		return q1.size()
+	else:
+		return q2.size()
+	
+q1=Queue()
+q2=Queue()
+stack_push([5,4,8],q1,q2)
+stack_print(q1,q2)
+print(stack_pop(q1,q2))
+print(stack_top(q1,q2))
+print(stack_size(q1,q2))
