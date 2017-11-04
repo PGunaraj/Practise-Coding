@@ -1,0 +1,25 @@
+def maxProfit(price):
+	buy=[]
+	sell=[]
+	count=0
+	i=0
+	n=len(price)
+	while i< n-1:
+		while i<n-1 and price[i+1]<=price[i]:
+			i+=1
+		if i==n-1:
+			break
+		buy.append(i)
+		i+=1
+		while i<n and price[i]>=price[i-1]:
+			i+=1
+		sell.append(i-1)
+		count+=1
+	if count==0:
+		print("no pair")
+	else:
+		for j in range(count):
+			print("buy at:",buy[j],"and sell at:",sell[j])
+
+price=[100, 180, 20, 310, 40, 535, 695]
+maxProfit(price)
