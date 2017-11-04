@@ -30,15 +30,18 @@ class Stack:
 	def size(self):
 		return len(self.list)
 
+def reverse(q):
+	s=Stack()
+	for i in range(q.size()):
+		s.push(q.dequeue())
+	for i in range(s.size()):
+		q.enqueue(s.pop())
+	q.printQueue()
+	
 q=Queue()
 q.enqueue(1)
 q.enqueue(2)
 q.enqueue(3)
 q.enqueue(4)
 q.enqueue(5)
-s=Stack()
-for i in range(q.size()):
-	s.push(q.dequeue())
-for i in range(s.size()):
-	q.enqueue(s.pop())
-q.printQueue()
+reverse(q)
