@@ -1,0 +1,63 @@
+class Queue:
+	def __init__(self):
+		self.list=[]
+	def enqueue(self,v):
+		self.list.append(v)
+	def dequeue(self):
+		return self.list.pop(0)
+	def front(self):
+		return self.list[0]
+	def printQueue(self):
+		print(self.list)
+	def isEmpty(self):
+		return len(self.list)==0
+	def size(self):
+		return len(self.list)
+
+class Stack:
+	def __init__(self):
+		self.list=[]
+	def push(self,v):
+		self.list.append(v)
+	def pop(self):
+		return self.list.pop()
+	def top(self):
+		return self.list[len(self.list)-1]
+	def printStack(self):
+		print(self.list)
+	def isEmpty(self):
+		return len(self.list)==0
+	def size(self):
+		return len(self.list)
+
+def reverse(q):
+	s=Stack()
+	for i in range(q.size()):
+		s.push(q.dequeue())
+	for i in range(s.size()):
+		q.enqueue(s.pop())
+	q.printQueue()
+
+def revK(q,k):
+	if k>q.size():
+		print("error")
+	elif k==q.size():
+		reverse(q)
+	else:
+		s=Stack()
+		for i in range(k):
+			s.push(q.dequeue())
+		for i in range(s.size()):
+			q.enqueue(s.pop())
+		for i in range(q.size()-k):
+			q.enqueue(q.dequeue())
+		q.printQueue()
+	
+q=Queue()
+q.enqueue(1)
+q.enqueue(2)
+q.enqueue(3)
+q.enqueue(4)
+q.enqueue(5)
+revK(q,3)
+
