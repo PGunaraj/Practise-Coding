@@ -1,0 +1,27 @@
+class Queue:
+	def __init__(self):
+		self.list=[]
+	def enqueue(self,v):
+		self.list.append(v)
+	def dequeue(self):
+		return self.list.pop(0)
+	def front(self):
+		return self.list[0]
+	def printQueue(self):
+		print(self.list)
+	def isEmpty(self):
+		return len(self.list)==0
+	def size(self):
+		return len(self.list)
+ 
+def genBin(n):
+	q=Queue()
+	q.enqueue("1")
+	while n>0:
+		temp=q.dequeue()
+		print(temp)
+		q.enqueue(temp+"0")
+		q.enqueue(temp+"1")
+		n-=1
+ 
+genBin(5)
