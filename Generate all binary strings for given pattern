@@ -1,0 +1,53 @@
+#using recursion
+def generateBinaryNumbers(s,i):
+	if i==len(s)-1:
+		print(s)
+	else:
+		for i in range(len(s)-1):
+			if s[i]=="?":
+				s=s[:i]+"0"+s[i+1:]
+				generateBinaryNumbers(s,i+1)
+				s=s[:i]+"1"+s[i+1:]
+				generateBinaryNumbers(s,i+1)
+
+s="1?0?1"
+generateBinaryNumbers(s,0)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+#using Queue
+class Queue:
+	def __init__(self):
+		self.list=[]
+	def enqueue(self,v):
+		self.list.append(v)
+	def dequeue(self):
+		return self.list.pop(0)
+	def front(self):
+		return self.list[0]
+	def printQueue(self):
+		print(self.list)
+	def isEmpty(self):
+		return len(self.list)==0
+	def size(self):
+		return len(self.list)
+
+def generateBinaryNumbers(s):
+	q=Queue()
+	q.enqueue(s)
+	while not q.isEmpty():
+		tmp=q.dequeue()
+		i=-1
+		while i<len(tmp)-1:
+			i+=1
+			if tmp[i]=="?":
+				t=tmp[:i]+"0"+tmp[i+1:]
+				q.enqueue(t)
+				t=tmp[:i]+"1"+tmp[i+1:]
+				q.enqueue(t)
+				break
+		if i==len(tmp)-1:
+			print(tmp)
+
+string="1?0?1"
+generateBinaryNumbers(string)
