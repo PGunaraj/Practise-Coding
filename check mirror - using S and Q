@@ -1,0 +1,121 @@
+Steps:
+1) push tree 1 into stack in Inorder
+2) enqueue tree 2 into Queue in Inorder
+3) check if (top of stack == front of queue) till both stack and queue becomes empty
+
+class BinaryTree:
+	def __init__(self,r):
+		self.root=r
+		self.left=None
+		self.right=None
+	def getLeft(self):
+		return self.left
+	def getRight(self):
+		return self.right
+	def getRoot(self):
+		return self.root
+	def insertLeft(self,val):
+		if self.left==None:
+			self.left=BinaryTree(val)
+		else:
+			t=BinaryTree(val)
+			t.left=self.left
+			self.left=t
+	def insertRight(self,val):
+		if self.right==None:
+			self.right=BinaryTree(val)
+		else:
+			t=BinaryTree(val)
+			t.right=self.right
+			self.right=t
+	def deleteLeft(self):
+		if self.left:
+			temp=self.left
+			if temp.left and temp.right:
+				self.left=temp.left
+				self.left.right=temp.right
+			elif temp.left:
+				self.left=temp.left
+			elif temp.right:
+				self.left=temp.right
+	def deleteRight(self):
+		if self.right:
+			temp=self.right
+			if temp.left and temp.right:
+				self.right=temp.left
+				self.right.right=temp.right
+			elif temp.left:
+				self.right=temp.left
+			elif temp.right:
+				self.right=temp.right
+			else:
+				self.root=None
+class Queue:
+	def __init__(self):
+		self.list=[]
+	def enqueue(self,v):
+		self.list.append(v)
+	def dequeue(self):
+		return self.list.pop(0)
+	def front(self):
+		return self.list[0]
+	def printQueue(self):
+		print(self.list)
+	def isEmpty(self):
+		return len(self.list)==0
+	def size(self):
+		return len(self.list)
+
+class Stack:
+	def __init__(self):
+		self.list=[]
+	def push(self,v):
+		self.list.append(v)
+	def pop(self):
+		return self.list.pop()
+	def top(self):
+		return self.list[len(self.list)-1]
+	def printStack(self):
+		print(self.list)
+	def isEmpty(self):
+		return len(self.list)==0
+	def size(self):
+		return len(self.list)
+
+def insertStack(r1,s):
+	if r1.left != None:
+		insertStack(r1.left,s)
+	s.push(r1.root)
+	if r1.right != None:
+		insertStack(r1.right,s)
+
+def insertQueue(r2,q):
+	if r2.left != None:
+		insertQueue(r2.left,q)
+	q.enqueue(r2.root)
+	if r2.right != None:
+		insertQueue(r2.right,q)
+
+def checkMirror(r1,r2):
+	s=Stack()
+	q=Queue()
+	insertStack(r1,s)
+	insertQueue(r2,q)
+	while not s.isEmpty and not q.isEmpty():
+		if s.pop() != q.dequeue():
+			return "no"
+	return "yes"
+
+x=BinaryTree('1')
+x.insertLeft('3')
+x.insertRight('2')
+r=x.getRight()
+r.insertLeft('4')
+r.insertRight('5')
+x1=BinaryTree('1')
+x1.insertLeft('2')
+x1.insertRight('3')
+r1=x1.getLeft()
+r1.insertLeft('5')
+r1.insertRight('4')
+print(checkMirror(x,x1))
