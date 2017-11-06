@@ -3,31 +3,19 @@ def firstNonRepeatChar(s):
 	q=[]
 	ans=[]
 	for ch in s:
-		if ch in d.keys() and d[ch]==2:
-			print("2")
-			ans.append(q[0])
-		elif ch in d.keys() and d[ch]==1:
-			print("1")
-			d[ch]=2
-			if len(q)>0:
-				if q[0]==ch:
-					q.pop(0)
-					if len(q)==0:
-						ans.append(str(-1))
-					else:
-						ans.append(q[0])
-				else:
-					x=q[0]
-					q.append(q.pop(0))
-					while q[0]!=x:
-						if q[0]==ch:
-							q.pop(0)
-						else:
-							q.append(q.pop(0))
-					ans.append(q[0])
-			else:
-				ans.append(str(-1))
+		q.append(ch)
+		if ch in d.keys():
+			d[ch]+=1
 		else:
 			d[ch]=1
-			q.append(ch)
-			ans.append(q[0])
+		while len(q)>0:
+			if d[q[0]]>1:
+				q.pop(0)
+			else:
+				ans.append(q[0])
+				break
+		if len(q)==0:
+			ans.append(str(-1))
+	print(ans)
+
+firstNonRepeatChar("aabcb")
