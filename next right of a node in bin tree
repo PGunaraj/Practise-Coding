@@ -1,0 +1,43 @@
+class Node:
+	def __init__(self,v):
+		self.val=v
+		self.left=None
+		self.right=None
+
+def nextRight(r,k):
+	if r is None:
+		return
+	else:
+		q=[]
+		lev=[]
+		level=0
+		q.append(r)
+		lev.append(level)
+		while len(q)>0:
+			node=q.pop(0)
+			level=lev.pop(0)
+			if node.val==k:
+				if len(q)==0 or lev[0]!=level:
+					return None
+				return q[0].val
+			if node.left is not None:
+				q.append(node.left)
+				lev.append(level+1)
+			if node.right is not None:
+				q.append(node.right)
+				lev.append(level+1)
+		return None
+
+r=Node(10)
+r.left=Node(2)
+r.right=Node(6)
+r.left.left=Node(8)
+r.left.right=Node(4)
+r.right.right=Node(5)
+
+print(nextRight(r,10))
+print(nextRight(r,2))
+print(nextRight(r,6))
+print(nextRight(r,8))
+print(nextRight(r,4))
+print(nextRight(r,5))
