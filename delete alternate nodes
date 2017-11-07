@@ -24,16 +24,12 @@ class LL:
 
 def deleteAlternateNodes(l):
 	prev=l.head
-	if prev.next:
-		curr=prev.next
-	while curr!=None:
-		curr=curr.next
-		prev.next=curr
-		prev=curr
-		if curr!=None and curr.next!=None:
-			curr=curr.next
-		else:
-			break
+	curr=prev.next
+	while prev!=None and curr!=None:
+		prev.next=curr.next
+		prev=prev.next
+		if prev!=None:
+			curr=prev.next
 	l.printLL()
 		
 
