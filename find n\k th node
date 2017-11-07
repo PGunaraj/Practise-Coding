@@ -1,0 +1,43 @@
+class Node:
+	def __init__(self,v):
+		self.val=v
+		self.next=None
+
+class LL:
+	def __init__(self):
+		self.head=None
+	def insert(self,v):
+		node=Node(v)
+		current=self.head
+		if current==None:
+			self.head=node
+		else:
+			while current.next!=None:
+				current=current.next
+			current.next=node
+	def size(self):
+		current=self.head
+		c=0
+		while current!=None:
+			c+=1
+			current=current.next
+		return c
+
+def findNode(l,k):
+	n=l.size()
+	pos=n//k
+	c=1
+	current=l.head
+	while c!=pos:
+		c+=1
+		current=current.next
+	return current.val
+
+l=LL()
+l.insert(1)
+l.insert(2)
+l.insert(3)
+l.insert(4)
+l.insert(5)
+l.insert(6)
+print(findNode(l,2))
