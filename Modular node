@@ -1,0 +1,36 @@
+class Node:
+	def __init__(self,v):
+		self.val=v
+		self.next=None
+
+class LL:
+	def __init__(self):
+		self.head=None
+	def insert(self,v):
+		node=Node(v)
+		current=self.head
+		if current==None:
+			self.head=node
+		else:
+			while current.next!=None:
+				current=current.next
+			current.next=node
+
+def findModularNode(l,k):
+	mod=0
+	c=1
+	current=l.head
+	while current!=None:
+		if c%k==0:
+			mod=current.val
+		c+=1
+		current=current.next
+	print(mod)
+
+l=LL()
+l.insert(3)
+l.insert(7)
+l.insert(1)
+l.insert(9)
+l.insert(8)
+findModularNode(l,2)
