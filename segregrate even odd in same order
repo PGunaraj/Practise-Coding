@@ -1,0 +1,63 @@
+class Node:
+	def __init__(self,v):
+		self.val=v
+		self.next=None
+
+class LL:
+	def __init__(self):
+		self.head=None
+	def insert(self,v):
+		node=Node(v)
+		current=self.head
+		if current==None:
+			self.head=node
+		else:
+			while current.next!=None:
+				current=current.next
+			current.next=node
+	def printLL(self):
+		current=self.head
+		while current!=None:
+			print(current.val,end=" ")
+			current=current.next
+		print()
+
+def getRear(l):
+	curr=l.head
+	while curr.next!=None:
+		curr=curr.next
+	return curr
+
+def EvenOdd(li):
+	l=li.head
+	r=getRear(li)
+	prev=None
+	while l.val%2==0:
+		prev=l
+		l=l.next
+	tmp=r
+	while l!=tmp.next:
+		if l.val%2==0:
+			l=l.next
+		else:
+			node=Node(l.val)
+			r.next=node
+			r=r.next
+			l=l.next
+			if not prev:
+				li.head=l
+			else:
+				if prev.val%2==0:
+					prev.next=l
+				else:
+					li.head=l
+			prev=l
+	li.printLL()
+
+l=LL()
+l.insert(5)
+l.insert(4)
+l.insert(3)
+l.insert(8)
+l.insert(1)
+EvenOdd(l)
