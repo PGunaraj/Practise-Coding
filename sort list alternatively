@@ -1,0 +1,76 @@
+class Node:
+	def __init__(self,v):
+		self.val=v
+		self.next=None
+class LL:
+	def __init__(self):
+		self.head=None
+	def insert(self,v):
+		node=Node(v)
+		current=self.head
+		if current==None:
+			self.head=node
+		else:
+			while current.next!=None:
+				current=current.next
+			current.next=node
+	def printLL(self):
+		current=self.head
+		while current!=None:
+			print(current.val,end=" ")
+			current=current.next
+		print()
+	def sortMerge(self,a,b):
+		if a is None:
+			return b
+		if b is None:
+			return a
+		if a.val<=b.val:
+			rslt=a
+			rslt.next=self.sortMerge(a.next,b)
+		else:
+			rslt=b
+			rslt.next=self.sortMerge(a,b.next)
+		return rslt
+	def reverse(self,last):
+		curr=last
+		prev=None
+		while curr is not None:
+			nxt=curr.next
+			curr.next=prev
+			prev=curr
+			curr=nxt
+		last=prev
+		return last
+	def splitList(self,front,last):
+		l=front
+		r=last
+		curr=self.head
+		while curr is not None:
+			l.next=curr
+			l=l.next
+			curr=curr.next
+			if curr is not None:
+				r.next=curr
+				r=r.next
+				curr=curr.next
+		l.next=None
+		r.next=None
+	def sortList(self):
+		front=Node(0)
+		last=Node(0)
+		self.splitList(front,last)
+		front=front.next
+		last=last.next
+		last=self.reverse(last)
+		self.head=self.sortMerge(front,last)
+
+l=LL()
+l.insert(13)
+l.insert(99)
+l.insert(21)
+l.insert(80)
+l.insert(50)
+#l.insert(7)
+l.sortList()
+l.printLL()
