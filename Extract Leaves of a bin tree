@@ -1,0 +1,81 @@
+class BinaryTree:
+	def __init__(self,r):
+		self.root=r
+		self.left=None
+		self.right=None
+	def insertLeft(self,val):
+		if self.left==None:
+			self.left=BinaryTree(val)
+		else:
+			t=BinaryTree(val)
+			t.left=self.left
+			self.left=t
+	def insertRight(self,val):
+		if self.right==None:
+			self.right=BinaryTree(val)
+		else:
+			t=BinaryTree(val)
+			t.right=self.right
+			self.right=t
+	def inorder(self):
+		if self.left:
+			self.left.inorder()
+		print(self.root, end=" ")
+		if self.right:
+			self.right.inorder()
+
+class Node:
+	def __init__(self,v):
+		self.val=v
+		self.next=None
+		
+class LL:
+	def __init__(self):
+		self.head=None
+	def insert(self,v):
+		node=Node(v)
+		current=self.head
+		if current==None:
+			self.head=node
+		else:
+			while current.next!=None:
+				current=current.next
+			current.next=node
+	def printLL(self):
+		current=self.head
+		while current!=None:
+			print(current.val,end=" ")
+			current=current.next
+		print()
+
+def isLeaf(x):
+	if x.left or x.right:
+		return False
+	else:
+		return True
+	
+def extractLeaves(b,l):
+	if b is not None:
+		if isLeaf(b):
+			return True
+		else:
+			if b.left:
+				x=extractLeaves(b.left,l)
+				if x:
+					l.insert(b.left.root)
+					b.left=None
+			if b.right:
+				x=extractLeaves(b.right,l)
+				if x:
+					l.insert(b.right.root)
+					b.right=None
+
+b=BinaryTree(1)
+b.insertLeft(2)
+b.insertRight(3)
+b.inorder()
+l=LL()
+extractLeaves(b,l)
+print()
+l.printLL()
+b.inorder()
