@@ -3,6 +3,8 @@ class BinaryTree:
 		self.root=r
 		self.left=None
 		self.right=None
+	def getLeft(self):
+		return self.left
 	def insertLeft(self,val):
 		if self.left==None:
 			self.left=BinaryTree(val)
@@ -20,7 +22,8 @@ class BinaryTree:
 	def inorder(self):
 		if self.left:
 			self.left.inorder()
-		print(self.root, end=" ")
+		if self.root:
+			print(self.root, end=" ")
 		if self.right:
 			self.right.inorder()
 
@@ -55,24 +58,28 @@ def isLeaf(x):
 		return True
 	
 def extractLeaves(b,l):
+	rt=b.root
 	if b is not None:
 		if isLeaf(b):
+			l.insert(b.root)
+			if b.root==rt:
+				b.root=None
 			return True
 		else:
 			if b.left:
 				x=extractLeaves(b.left,l)
 				if x:
-					l.insert(b.left.root)
 					b.left=None
 			if b.right:
 				x=extractLeaves(b.right,l)
 				if x:
-					l.insert(b.right.root)
 					b.right=None
 
-b=BinaryTree(1)
-b.insertLeft(2)
-b.insertRight(3)
+b=BinaryTree(5)
+b.insertLeft(10)
+b.insertRight(12)
+xx=b.getLeft()
+xx.insertLeft(15)
 b.inorder()
 l=LL()
 extractLeaves(b,l)
