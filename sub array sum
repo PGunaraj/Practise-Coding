@@ -1,0 +1,35 @@
+#dont handle negative numbers
+def subArraySum(arr,s):
+	curr=arr[0]
+	start=0
+	for i in range(1,len(arr)+1):
+		while curr>s and start<i-1:
+			curr-=arr[start]
+			start+=1
+		if curr==s:
+			print(start,i-1)
+			return
+		if i<len(arr):
+			curr+=arr[i]
+	print(-1)
+	return
+  
+subArraySum([15, 2, 4, 8, 9, 5, 10, 23], 23)
+
+#handles neg num too - hashing method
+def subArraySum(arr,s):
+	curr=0
+	d={}
+	for i in range(len(arr)):
+		curr+=arr[i]
+		if curr==s:
+			print(0,"to",i)
+			return
+		if (curr-s) in d.keys():
+			print(d[curr-s]+1,"to",i)
+			return
+		d[curr]=i
+	print(-1)
+	return
+
+subArraySum([10,2,-2,-20,10], -10)
