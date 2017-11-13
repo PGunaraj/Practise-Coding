@@ -1,0 +1,88 @@
+checkIfBST: check if binary tree is a BST or not
+(Hint- check if each node satisfies BST condition which is node should be less than root if it is in left sub tree 
+and node should be greater than root if it is in right sub tree)
+
+checkIfValid: check if tree is a valid tree or not (i.e) child should not point ot its parent (i.e)tree should not have loops.
+
+LCA: common parent or ancestor for given 2 nodes
+
+class BinTree:
+	def __init__(self,v):
+		self.val=v
+		self.left=None
+		self.right=None
+	def getRoot(self):
+		return self.val
+	def setRoot(self,v):
+		self.val=v
+	def getLeft(self):
+		return self.left
+	def getRight(self):
+		return self.right
+	def insertLeft(self,v):
+		if self.left is None:
+			self.left=BinTree(v)
+		else:
+			temp=BinTree(v)
+			temp.left=self.left
+			self.left=temp
+	def insertRight(self,v):
+		if self.right is not None:
+			self.right=BinTree(v)
+		else:
+			temp=BinTree(v)
+			temp.right=self.right
+			self.right=temp
+	def preorder(self):
+		print(self.val,end=" ")
+		if self.left:
+			self.left.preorder()
+		if self.right:
+			self.right.preorder()
+
+def checkBST(node,max,min):
+	if node is None:
+		return True
+	return node.val<max and node.val>min and checkBST(node.left,node.val,min) and checkBST(node.right,max,node.val)
+
+def ifValidTree(b,visited):
+	if b is None:
+		return True
+	if b.val not in visited.keys():
+		visited[b.val]=1
+		return ifValidTree(b.left,visited) and ifValidTree(b.right,visited)
+	else:
+		return False
+
+#when number not in tree is given, this algo simply prints other number #need to handle this
+def LCA(b,n1,n2):
+	if b is None:
+		return None
+	if b.val==n1 or b.val==n2:
+		return b
+	l=LCA(b.left,n1,n2)
+	r=LCA(b.right,n1,n2)
+	if l is not None and r is not None:
+		return b
+	elif l is not None:
+		return l
+	else:
+		return r
+	
+
+b=BinTree(10)
+b.insertLeft(5)
+b.insertRight(12)
+x=b.getLeft()
+x.insertRight(8)
+x1=x.getRight()
+x1.insertLeft(4)
+x1.insertRight(7)
+y=b.getRight()
+y.insertLeft(9)
+b.preorder()
+print()
+print(checkBST(b,100,-100))
+visited={}
+print(ifValidTree(b,visited))
+print(LCA(b,8,7).val)
