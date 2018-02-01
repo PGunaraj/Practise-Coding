@@ -1,0 +1,39 @@
+#2O(n)
+O(n) - finding middle and reversing 2nd list
+O(n) - checking both list elem's
+
+
+def isPalindrome(self, head):
+       
+        if head is None:
+            return True
+        
+        fast=head.next
+        slow=head
+        
+        #finding the middle of list. 'slow' will be the split/middle node
+        while fast and fast.next:
+            fast=fast.next.next
+            slow=slow.next
+        
+        #second list
+        secHead=slow.next
+        slow.next=None
+        
+        #reversing second list
+        prev=None
+        while secHead:
+            nxt=secHead.next
+            secHead.next=prev
+            prev=secHead
+            secHead=nxt
+        
+        head2=prev
+        
+        #checking if elem of both lists are same or not
+        while head2:
+            if head2.val!=head.val:
+                return False
+            head2=head2.next
+            head=head.next
+        return True
