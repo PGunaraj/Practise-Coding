@@ -1,40 +1,45 @@
-def stringCompression(string):
-	index=0
-	l=0
-	r=1
-	count=1
-	if len(string)<2:
-		return "error"
-	while r<len(string):
-		while r<len(string) and string[l]==string[r]:
-			r+=1
-			count+=1
-		if index<len(string)-1:
-			string[index]=string[l]
-			index+=1
-			string[index]=str(count)
-			index+=1
-			l=r
-			r=r+1
-			count=1
-		else:
-			return "error"
-	if l==len(string)-1:
-		if index<len(string)-1:
-			string[index]=string[l]
-			index+=1
-			string[index]=str(count)
-			index+=1
-		else:
-			return "error"
-	if index==len(string)-1:
-		string[index]=""
-	string=''.join(string)
-	return string
-	
-s="aaabcccdd"
-s=list(s)
-print(stringCompression(s))
-s="aaabb"
-s=list(s)
-print(stringCompression(s))
+https://leetcode.com/problems/string-compression/description/
+
+class Solution(object):
+    def compress(self, chars):
+        """
+        :type chars: List[str]
+        :rtype: int
+        """
+        string=chars
+        index=0
+        l=0
+        r=1
+        count=1
+        if len(string)<2:
+            return len(string)
+        while r<len(string):
+            while r<len(string) and string[l]==string[r]:
+                r+=1
+                count+=1
+            if index<len(string):
+                string[index]=string[l]
+                index+=1
+                if count>1:
+                    if count>9:
+                        string[index]=str(count//10)
+                        index+=1
+                        string[index]=str(count%10)
+                        index=index+1
+                    else:
+                        string[index]=str(count)
+                        index+=1
+                l=r
+                r=l+1
+                count=1
+            else:
+                return "error1"
+        if l==len(string)-1:
+            string[index]=string[l]
+            index=index+1
+        while index<len(string):
+            string[index]=""
+            index=index+1
+        string=''.join(string)
+        return len(string)
+        
