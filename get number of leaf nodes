@@ -1,0 +1,35 @@
+Method 1:
+1) recursively traverse each node
+2) count=0
+3) when u find a leaf node, increase the count
+
+
+def NoOfLeafNodes(r):
+	if r==None:
+		return 0
+	elif r.left==None and r.right==None:
+		return 1
+	else:
+		return NoOfLeafNodes(r.left)+NoOfLeafNodes(r.right)
+    
+    
+
+Method 2:
+1) do level order traversal
+2) count=0
+3) when u find a leaf node, increase the count
+
+
+def NoOfLeafNodes(r):
+	q=[]
+	q.append(r)
+	count=0
+	while len(q)>0:
+		temp=q.pop(0)
+		if temp.left!=None:
+			q.append(temp.left)
+		if temp.right!=None:
+			q.append(temp.right)
+		if temp.left==None and temp.right==None:
+			count=count+1
+	return count
